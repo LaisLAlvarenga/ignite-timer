@@ -1,3 +1,6 @@
+/* 
+    Utilizando config pronta da rocketseat. (https://www.npmjs.com/package/eslint-plugin-react-hooks)
+*/
 {
     "extends": "@rocketseat/eslint-config/react"
 }

@@ -1,4 +1,4 @@
-import {createGlobalStyle} from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
     * {
@@ -15,12 +15,12 @@ export const GlobalStyle = createGlobalStyle`
             0 de Blur
             2px de tamanho 
         */
-        box-sizing: 0 0 0 2px ${props => props.theme['green-500']};
+        box-sizing: 0 0 0 2px ${(props) => props.theme['green-500']};
     }
 
     body {
-        color: ${props => props.theme['gray-300']};
-        background-color: ${props => props.theme['gray-900']};
+        color: ${(props) => props.theme['gray-300']};
+        background-color: ${(props) => props.theme['gray-900']};
     }
 
     body, input, button, textarea {

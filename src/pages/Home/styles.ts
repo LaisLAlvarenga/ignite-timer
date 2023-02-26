@@ -50,6 +50,11 @@ const BaseInput = styled.input`
 
 export const TaskInput = styled(BaseInput)`
   flex: 1; /* Para ocupar todo o espaço disponível */
+
+  // Para remover esse indicator que vem com o <datalist>, basta utilizar esse webkit
+  &::-webkit-calendar-picker-indicator {
+    display: none !important;
+  }
 `
 export const AmountMinutesInput = styled(BaseInput)`
   width: 4rem;

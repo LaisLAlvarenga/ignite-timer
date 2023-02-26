@@ -4,12 +4,13 @@ export const HomeContainer = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 2.5rem;
 
   form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3.5rem;
+    gap: 2rem;
   }
 `
 export const FormContainer = styled.div`

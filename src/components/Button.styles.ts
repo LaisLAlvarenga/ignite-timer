@@ -13,5 +13,7 @@ const color = {
 export const ButtonContainer = styled.button<ButtonContainerProps>`
     height: 40px;
     width: 100px;
-    background-color: ${props => color[props.isColor]};
+    /* background-color: ${props => color[props.isColor]}; */
+    background-color: ${props => props.theme[props.isColor]};
+    color: ${props => props.theme.text};
 `

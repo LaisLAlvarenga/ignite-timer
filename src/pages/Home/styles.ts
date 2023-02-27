@@ -4,7 +4,6 @@ export const HomeContainer = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2.5rem;
 
   form {
     display: flex;

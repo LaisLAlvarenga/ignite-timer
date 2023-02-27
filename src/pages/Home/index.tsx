@@ -64,7 +64,7 @@ export function Home() {
             <span>0</span>
           </CountdownContainer>
 
-          <ButtonContainer disabled>
+          <ButtonContainer disabled={task === ''}>
             <Play size={24} />
             Começar
           </ButtonContainer>

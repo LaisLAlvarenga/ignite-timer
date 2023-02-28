@@ -11,11 +11,20 @@ import {
 } from './styles'
 
 export function Home() {
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, watch } = useForm()
 
   function handleNewSubmit(data: any) {
     console.log(data)
   }
+
+  /* 
+    Fica monitorando o input task e saber o conteúdo de dentro dele em tempo real.
+    Se o conteúdo for diferente de vazio então o botão estará habilitado.
+  */
+  const task = watch('task')
+
+  // Estará desabilitado quando o task estiver vazia.
+  const isSubmitDisabled = !task
 
   return (
     <>
@@ -58,7 +67,7 @@ export function Home() {
             <span>0</span>
           </CountdownContainer>
 
-          <ButtonContainer>
+          <ButtonContainer disabled={isSubmitDisabled}>
             <Play size={24} />
             Começar
           </ButtonContainer>

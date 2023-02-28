@@ -24,27 +24,34 @@ const newCycleFormValidationSchema = zod.object({
   task: zod.string().min(1, 'Informe a tarefa'),
   AmountMinutesInput: zod
     .number()
-    .min(5)
+    .min(5, 'O ciclo precisa ser de no mínimo 5 minutos.')
     .max(60, 'O ciclo deve ser de no máximo 60 minutos.'),
 })
 
-/* Tipando os dados que são utilizados nafunção handleCreateNewCycle */
+// Tipando os dados que são utilizados na função handleCreateNewCycle
 interface NewCycleFormData {
   task: string
   amountMinutes: number
 }
 
 export function Home() {
-  const { register, handleSubmit, watch, formState } = useForm({
+  /* 
+    Podemos passar dentro do objeto de configuração do useForm() 
+    a propriedade DefaultValues e ela trás a possibilidade de passar
+    qual o valor inicial de cada campo.
+    E para o TS sugerir os campos disponíveis basta utilizar do Generics e tipar o useForm. 
+  */
+  const { register, handleSubmit, watch } = useForm<NewCycleFormData>({
     resolver: zodResolver(newCycleFormValidationSchema),
+    defaultValues: {
+      task: '',
+      amountMinutes: 0,
+    },
   })
 
   function handleCreateNewCycle(data: NewCycleFormData) {
     console.log(data)
   }
-
-  // O formState é para conseguirmos visualizar os erros de validação que acontecem e não são exibidos em tela.
-  console.log(formState.errors)
 
   /* 
     Fica monitorando o input task e saber o conteúdo de dentro dele em tempo real.

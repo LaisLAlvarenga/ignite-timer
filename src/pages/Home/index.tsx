@@ -1,3 +1,4 @@
+import { useForm } from 'react-hook-form'
 import { Play } from 'phosphor-react'
 import {
   ButtonContainer,
@@ -10,28 +11,24 @@ import {
 } from './styles'
 
 export function Home() {
-  /*
-    Modelo Uncontrolled:
-    Busca a informação no input somente quando precisamos dela.
-    Desvantagem: Perda da fluidez, como não temos o tempo real não conseguimos habilitar ou desabilitar algo de forma rápida. 
-    Vantagem: Melhora na performance.
-  */
-  function handleSubmit(event) {
-    console.log(event.target.task.value)
+  const { register, handleSubmit } = useForm()
+
+  function handleNewSubmit(data: any) {
+    console.log(data)
   }
 
   return (
     <>
       <HomeContainer>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(handleNewSubmit)}>
           <FormContainer>
             <label htmlFor="task">Vou trabalhar em</label>
             <TaskInput
               type="text"
-              name="task"
               id="task"
               placeholder="Dê um nome para o seu projeto"
               list="task-suggestions"
+              {...register('task')}
             />
 
             {/* O <datalist> serve para ter dentro do input sugestões já fixas para o usuário. Futuramente, o que ele informar fica salvo nesse data list de sugestões */}
@@ -44,12 +41,11 @@ export function Home() {
             <label htmlFor="amountMinutes">durante</label>
             <AmountMinutesInput
               type="number"
-              name="amountMinutes"
               id="amountMinutes"
               placeholder="00"
-              step={10}
-              min={10}
-              max={50}
+              {...register('amountMinutes', {
+                valueAsNumber: true,
+              })}
             />
             <span>minutos.</span>
           </FormContainer>

@@ -10,12 +10,35 @@ import {
   AmountMinutesInput,
 } from './styles'
 
+// @hookform/resolvers é uma biblioteca que permite a integração do react-hook-form com libs de validação como o zod.
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
+
+/*
+  1) Passar o resolver dentro do useForm()
+  2) Dentro do zodResolver devemos passar todas as regras de validação que os inputs devem ter. (Separando dentro de uma var)
+  3) zod.object() pois tipo de dado que o nosso form retorna é um objeto com o dado de task e amountMinute. E passamos um objeto com os dados que estamos validando (task | amountMinutes)
+  4) Criamos todas as validações que cada input deve ter.
+*/
+const newCycleFormValidationSchema = zod.object({
+  task: zod.string().min(1, 'Informe a tarefa'),
+  AmountMinutesInput: zod
+    .number()
+    .min(5)
+    .max(60, 'O ciclo deve ser de no máximo 60 minutos.'),
+})
+
 export function Home() {
-  const { register, handleSubmit, watch } = useForm()
+  const { register, handleSubmit, watch, formState } = useForm({
+    resolver: zodResolver(newCycleFormValidationSchema),
+  })
 
   function handleNewSubmit(data: any) {
     console.log(data)
   }
+
+  // O formState é para conseguirmos visualizar os erros de validação que acontecem e não são exibidos em tela.
+  console.log(formState.errors)
 
   /* 
     Fica monitorando o input task e saber o conteúdo de dentro dele em tempo real.
@@ -52,6 +75,7 @@ export function Home() {
               type="number"
               id="amountMinutes"
               placeholder="00"
+              step={10}
               {...register('amountMinutes', {
                 valueAsNumber: true,
               })}

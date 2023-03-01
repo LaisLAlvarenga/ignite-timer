@@ -41,7 +41,7 @@ export function Home() {
     qual o valor inicial de cada campo.
     E para o TS sugerir os campos disponíveis basta utilizar do Generics e tipar o useForm. 
   */
-  const { register, handleSubmit, watch } = useForm<NewCycleFormData>({
+  const { register, handleSubmit, watch, reset } = useForm<NewCycleFormData>({
     resolver: zodResolver(newCycleFormValidationSchema),
     defaultValues: {
       task: '',
@@ -51,6 +51,7 @@ export function Home() {
 
   function handleCreateNewCycle(data: NewCycleFormData) {
     console.log(data)
+    reset() /* Da o reset nos inputs após o submit. Somente daqueles campos definidos no defaultValues */
   }
 
   /* 
